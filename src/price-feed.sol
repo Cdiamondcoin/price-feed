@@ -1,8 +1,8 @@
-pragma solidity ^0.4.23;
+pragma solidity 0.5.11;
 
 import "ds-thing/thing.sol";
 
-interface Medianizer {
+interface MedianizerLike {
     function poke() external;
 }
 
@@ -13,13 +13,13 @@ contract PriceFeed is DSThing {
 
     function peek() external view returns (bytes32,bool)
     {
-        return (bytes32(val), now < zzz);
+        return (bytes32(uint(val)), now < zzz);
     }
 
     function read() external view returns (bytes32)
     {
         require(now < zzz);
-        return bytes32(val);
+        return bytes32(uint(val));
     }
 
     function poke(uint128 val_, uint32 zzz_) external note auth
@@ -28,7 +28,7 @@ contract PriceFeed is DSThing {
         zzz = zzz_;
     }
 
-    function post(uint128 val_, uint32 zzz_, Medianizer med_) external note auth
+    function post(uint128 val_, uint32 zzz_, MedianizerLike med_) external note auth
     {
         val = val_;
         zzz = zzz_;
